@@ -5,15 +5,21 @@ var model = require('../models/CommuDAO');
  
 /* GET */
 router.post('/', function(req, res, next) {
+    console.log('insertMember')
     if(req.body.name && req.body.email){
         model.insertMember(req.body, (results)=>{
           res.redirect('/');
         })
       }
-    // var name = req.body.name;
-    // var email = req.body.email;
-    // console.log("## get request");
-    // res.render('result_page', {title:"title", name: name, email: email, method: "post" });
+});
+
+router.get('/', function(req, res, next) {
+    if(req.query.email && req.query.pwd){
+        console.log('checkMember')
+        model.checkMember(req.query, (results)=>{
+          res.redirect('/');
+        })
+      }
 });
 
 module.exports = router;
