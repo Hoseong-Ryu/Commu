@@ -14,9 +14,9 @@ exports.insertMember = function(body, cb){
 }
 
 //로그인
-exports.checkMember = function(query,cb){
-    var inputPwd = query.pwd;
-    connection.query(`SELECT * FROM member where email = '${query.email}';`, function (error, results, fields) {
+exports.checkMember = function(body,cb){
+    var inputPwd = body.pwd;
+    connection.query(`SELECT * FROM member where email = '${body.email}';`, function (error, results, fields) {
         // console.log(results[0].name)
         if(error){
             console.log(error);
