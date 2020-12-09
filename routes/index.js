@@ -47,7 +47,15 @@ router.get('/index', (req, res) => {      // 1
           console.log(`req.session.destroy error : ${err}`);
       res.redirect('/index');
     });
-  })
+  });
+  
+  router.get('/write', (req, res) => {      // 1
+    if(req.session.logined) {
+      res.render('write', { title: req.session.name, });
+    } else {
+      res.render('index', { title: "Commu", login: false });
+    }
+  });
   
 
 
