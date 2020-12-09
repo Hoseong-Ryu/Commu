@@ -14,7 +14,7 @@ exports.insertMember = function(body, cb){
 }
 
 //로그인
-exports.checkMember = function(body,cb){
+exports.checkMember = function(body,session,cb){
     var inputPwd = body.pwd;
     connection.query(`SELECT * FROM member where email = '${body.email}';`, function (error, results, fields) {
         // console.log(results[0].name)
@@ -23,6 +23,8 @@ exports.checkMember = function(body,cb){
         }else{
             if(results.length==1){
                 if(inputPwd===results[0].pwd){
+                    session.logined = true;
+                    session.name = results[0].name;
                     cb(results[0].name)
                 }
                 else{
@@ -30,9 +32,7 @@ exports.checkMember = function(body,cb){
                 }
             }else{
                 cb('nonemail')
-            }
-            
-            
+            }            
         }
     });
 }
