@@ -5,22 +5,23 @@ var session = require('express-session')
 var model = require('../models/CommuDAO');
  
 
-
-
-
 router.post('/', function(req, res, next) {
   if(req.session.name && req.body.contents && req.body.title){
+    model.checkPostIndex((data)=>{
       model.writePost(req.body,req.session, (results)=>{
         console.log('작성 완료');
-        res.redirect('/index');
+        res.render('index',{title: req.session.name, login: true,  postInfo: data,});
       })
+    }); 
     }
+    
   else{
-      res.render('index', { title: req.session.name });
+    res.redirect('/write');
       console.log('작성 실패');
   }
 });
-  
+
+
 
 
 module.exports = router;

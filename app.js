@@ -9,9 +9,9 @@ require('dotenv').config()
 console.log(process.env.DB_HOST, process.env.DB_USER, process.env.DB_PASS);
 var indexRouter = require('./routes/index');
 var login_page = require('./routes/LoginTest'); 
+var write_page = require('./routes/write');
 var signintest = require('./routes/SigninTest'); 
 var usersRouter = require('./routes/users');
-var write_page = require('./routes/write');
 
 var app = express();
 
