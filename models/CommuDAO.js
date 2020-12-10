@@ -1,4 +1,5 @@
 var connection = require('./db')
+var postid = 0;
 
 //회원가입
 exports.insertMember = function(body, cb){
@@ -35,4 +36,18 @@ exports.checkMember = function(body,session,cb){
             }            
         }
     });
+}
+
+//게시글 작성
+exports.writePost = function(body,session, cb){
+    postid ++;
+    sql = 'INSERT INTO Post (idPost, name, title, contents) VALUES(?, ?, ?, ?)';
+    values = [postid, session.name, body.title, body.contents];
+    connection.query(sql, values, function(error, results, fields){
+        if(error){
+            console.log(error);
+        }else{
+            cb(results);
+        }
+    })
 }

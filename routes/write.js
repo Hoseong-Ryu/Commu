@@ -7,13 +7,19 @@ var model = require('../models/CommuDAO');
 
 
 
-  router.get('/logout', (req, res)=>{
-    req.session.destroy(function(err){
-      if(err)
-          console.log(`req.session.destroy error : ${err}`);
-      res.redirect('/index');
-    });
-  })
+
+router.post('/', function(req, res, next) {
+  if(req.session.name && req.body.contents && req.body.title){
+      model.writePost(req.body,req.session, (results)=>{
+        console.log('작성 완료');
+        res.redirect('/index');
+      })
+    }
+  else{
+      res.render('index', { title: req.session.name });
+      console.log('작성 실패');
+  }
+});
   
 
 
