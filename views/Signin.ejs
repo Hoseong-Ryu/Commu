@@ -45,14 +45,20 @@
       <div class="" style="color: white; ">
         <h1 class="display-4" style="display: inline; padding-left: 3%;">Commu </h1>
         <p class="lead" style="display: inline;">The GSM Anonymous Space
-          <a href="#">
+          <% if(login){ %>
+          <a href="/logout">
+            <p class="lead" style=" padding-left: 50%; display: inline; text-align: right;">로그아웃
+            </p>
+        <%} else { %>
+          <a href="/login_page">
             <p class="lead" style=" padding-left: 50%; display: inline; text-align: right;">로그인
             </p>
+            <a href="/signin_page">
+              <p class="lead" style="display: inline;">회원가입
+              </p>
+            </a>
           </a>
-          <a href="#">
-            <p class="lead" style="display: inline;">회원가입
-            </p>
-          </a>
+        <% } %>
         </p>
 
       </div>
