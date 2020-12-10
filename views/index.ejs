@@ -44,14 +44,20 @@
     <div class="" style="color: white; ">
       <h1 class="display-4" style="display: inline; padding-left: 3%;">Commu </h1>
       <p class="lead" style="display: inline;">The GSM Anonymous Space
-        <a href="#">
-          <p class="lead" style=" padding-left: 50%; display: inline; text-align: right;">로그인
-          </p>
-        </a>
-        <a href="#">
-          <p class="lead" style="display: inline;">회원가입
-          </p>
-        </a>
+        <% if(login){ %>
+          <a href="/logout">
+            <p class="lead" style=" padding-left: 50%; display: inline; text-align: right;">로그아웃
+            </p>
+        <%} else { %>
+          <a href="/login_page">
+            <p class="lead" style=" padding-left: 50%; display: inline; text-align: right;">로그인
+            </p>
+            <a href="#">
+              <p class="lead" style="display: inline;">회원가입
+              </p>
+            </a>
+          </a>
+        <% } %>
       </p>
 
     </div>
@@ -59,12 +65,18 @@
 
   <div class="jumbotron jumbotron-fluid" style="background-color: rgb(78, 138, 112); padding:1.5%; ">
     <div class="" style="color: white; ">
-      <p class="lead" style=" display: inline; padding-left: 3%;">"이름" 님 환영합니다!
-      </p>
-      <a href="#">
-        <p class="lead" style="display: inline; padding-left: 65%;">게시물 등록
+      <% if(login){ %>
+        <p class="lead" style=" display: inline; padding-left: 3%;"><%= title %> 님 환영합니다!
         </p>
-      </a>
+        <a href="/write">
+          <p class="lead" style="display: inline; padding-left: 65%;">게시물 등록
+          </p>
+        </a>
+      <%} else { %>
+        <p class="lead" style=" display: inline; padding-left: 3%;">
+      <% } %>
+      
+      
       </p>
 
     </div>
