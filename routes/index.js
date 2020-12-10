@@ -4,8 +4,9 @@ var bodyParser = require('body-parser');
 var session = require('express-session')
 var model = require('../models/CommuDAO');
  
-
+  
 router.post('/index', function(req, res, next) {
+  model.checkPostIndex((data)=>{
     console.log('insertMember')
     if(req.body.name && req.body.email){
         model.insertMember(req.body, (results)=>{
@@ -20,13 +21,14 @@ router.post('/index', function(req, res, next) {
             } 
             else{
                 console.log(results)
-                res.render('index', { title: req.session.name, login: true });
+                res.render('index', { title: req.session.name, login: true, postInfo: data, });
             }
         })
     }
     else{
         res.render('index', { title: 'Commu' });
     }
+  });
 });
 // /* GET home page. */
 // router.get('/index', function(req, res, next) {
@@ -34,12 +36,25 @@ router.post('/index', function(req, res, next) {
 // });
 
 router.get('/index', (req, res) => {      // 1
+
+  model.checkPostIndex((results)=>{
     if(req.session.logined) {
-      res.render('index', { title: req.session.name, login: true });
+      res.render('index', { 
+      title: req.session.name,
+      login: true,
+      postInfo: results,
+    });
+
     } else {
-      res.render('index', { title: "Commu", login: false });
+      res.render('index', { 
+        title: "Commu", 
+        login: false,
+        postInfo: results,
+      });
     }
   });
+  
+});
 
   router.get('/logout', (req, res)=>{
     req.session.destroy(function(err){
@@ -51,7 +66,7 @@ router.get('/index', (req, res) => {      // 1
   
   router.get('/write', (req, res) => {      // 1
     if(req.session.logined) {
-      res.render('write', { title: req.session.name, });
+      res.render('write', { title: req.session.name, login: true });
     } else {
       res.render('index', { title: "Commu", login: false });
     }

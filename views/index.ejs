@@ -52,7 +52,7 @@
           <a href="/login_page">
             <p class="lead" style=" padding-left: 50%; display: inline; text-align: right;">로그인
             </p>
-            <a href="#">
+            <a href="/signin_page">
               <p class="lead" style="display: inline;">회원가입
               </p>
             </a>
@@ -94,12 +94,14 @@
     </thead>
 
     <tbody>
+      <% for(let i=0;i<postInfo.length;i++){ %>
       <tr>
-        <td width="7%">1</td>
-        <td width="79%">Test1</td>
+        <td width="7%"><%= postInfo[i].idPost %></td>
+        <td width="79%"><%= postInfo[i].title %></td>
         <td width="7%">2</td>
         <td width="7%">3</td>
       </tr>
+      <% } %>
     </tbody>
   </table>
 
